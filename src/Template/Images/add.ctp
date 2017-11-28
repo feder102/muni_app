@@ -23,15 +23,15 @@
         <div class="page-header">
             <h2>Agregar imagen</h2>
         </div>
-        <?= $this->Form->create($image) ?>
+        <?= $this->Form->create($image, ['type' => 'file']);?> 
             <fieldset>
             <?php
                 echo $this->Form->control('name');
                 echo $this->Form->control('description');
                 echo $this->Form->control('quantity');
                 echo $this->Form->control('price');
-                echo $this->Form->control('photo');
-                echo $this->Form->control('photo_dir');
+                echo $this->Form->control('photo', ['type' => 'file']);
+                
             ?>
         </fieldset>
         <?= $this->Form->button('Agregar imagen'); ?>

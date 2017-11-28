@@ -29,13 +29,8 @@ class Image extends Entity
      * @var array
      */
     protected $_accessible = [
-        'name' => true,
-        'description' => true,
-        'quantity' => true,
-        'price' => true,
-        'photo' => true,
-        'photo_dir' => true,
-        'created' => true,
-        'modified' => true
+        '*' => true,
+        'id' => false,
+        'photo_dir' => false
     ];
 }

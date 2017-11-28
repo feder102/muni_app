@@ -37,6 +37,20 @@ class ImagesTable extends Table
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->addBehavior('Proffer.Proffer', [
+            'photo' => [    // The name of your upload field
+                'root' => WWW_ROOT . 'files', // Customise the root upload folder here, or omit to use the default
+                'dir' => 'photo_dir',   // The name of the field to store the folder
+                'thumbnailSizes' => [ // Declare your thumbnails
+                    'square' => [   // Define the prefix of your thumbnail
+                        'w' => 300, // Width
+                        'h' => 300, // Height
+                        'jpeg_quality'  => 100
+                    ]
+                ],
+                'thumbnailMethod' => 'gd'   // Options are Imagick or Gd
+            ]
+        ]);
     }
 
     /**
@@ -72,17 +86,16 @@ class ImagesTable extends Table
             ->requirePresence('price', 'create')
             ->notEmpty('price');
 
+        /*$validator->provider('proffer', 'Proffer\Model\Validation\ProfferRules');
+        // Set the thumbnail resize dimensions
+        $validator->add('photo', 'proffer', [
+            'rule' => ['extension' => ['jpeg','png','jpg']],
+            'message' => 'La imagen no tiene la extension correcta.'
+        ]);    */
+        /*https://github.com/davidyell/CakePHP3-Proffer/blob/master/docs/validation.md*/
         $validator
-            ->scalar('photo')
-            ->maxLength('photo', 255)
             ->requirePresence('photo', 'create')
             ->notEmpty('photo');
-
-        $validator
-            ->scalar('photo_dir')
-            ->maxLength('photo_dir', 255)
-            ->requirePresence('photo_dir', 'create')
-            ->notEmpty('photo_dir');
 
         return $validator;
     }
