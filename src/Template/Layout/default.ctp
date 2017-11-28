@@ -26,10 +26,13 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     </title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['bootstrap']) ?>
-
-    <?= $this->Html->script(['jquery-3.2.1','bootstrap']) ?>
-
+    <?= $this->Html->script(['jquery-3.2.1']) ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
+    
+    <?= $this->Html->script(['bootstrap.min']) ?>
+    <?= $this->Html->css(['bootstrap.min']) ?>
+    
+    
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
@@ -37,7 +40,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
 </head>
 <body>
     <?= $this->element('menu') ?>
-    <div class="container">
+    <div class="container" style="margin:100px">
         <?= $this->Flash->render() ?>
         <?= $this->fetch('content') ?>
     </div>
