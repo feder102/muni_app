@@ -43,36 +43,40 @@ class AppController extends Controller
 
         $this->loadComponent('RequestHandler');
         $this->loadComponent('Flash');
-        // $this->loadComponent('Auth',[
-        //     'authorize'=> ['Controller'],
-        //     'autenticate' => [
-        //         'Form' => [
-        //             'fields'=>[
-        //                 'username'=>'username',
-        //                 'password'=>'password'
-        //                 ]
-        //             ]
-        //         ],
-        //         'loginAction' => [
-        //             'Controller' => 'Users',
-        //             'action' => 'login'
-        //         ],
-        //         'authError'=>'Ingrese sus datos',
-        //         'loginRedirect'=> [
-        //             'Controller'=>'Users',
-        //             'action'=>'login'
-        //         ],
-        //         'logoutRedirect' => [
-        //             'Controller'=> 'Users',
-        //             'action'=> 'login'
-        //         ]
-        //     ]);
+        $this->loadComponent('Auth',[
+            'authorize'=> ['Controller'],
+            'autenticate' => [
+                'Form' => [
+                    'fields'=>[
+                        'username'=>'username',
+                        'password'=>'password'
+                        ]
+                    ]
+                ],
+                'loginAction' => [
+                    'Controller' => 'users',
+                    'action' => 'login'
+                ],
+                'authError'=>'Ingrese sus datos',
+                'loginRedirect'=> [
+                    'Controller'=>'Users',
+                    'action'=>'login'
+                ],
+                'logoutRedirect' => [
+                    'Controller'=> 'Users',
+                    'action'=> 'login'
+                ]
+            ]);
         /*
          * Enable the following components for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
         //$this->loadComponent('Security');
         //$this->loadComponent('Csrf');
+    }
+    public function beforeFilter(Event $event)
+    {
+        $this->Auth->allow(['login', 'logout','home']);
     }
 
     /**
@@ -93,7 +97,15 @@ class AppController extends Controller
         }
     }
 
-    public function isAuthorized($user){
-        return true;
+    public function isAuthorized($user)
+    {
+        // Admin can access every action
+        if (isset($user['role']) && $user['role'] === 'Administrador') {
+            return true;
+        }
+
+        // Default deny
+        //return $this->redirect(['controller'=>'users','action'=>'login']);
+        return false;
     }
 }

@@ -2,7 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Event\Event;
+use Cake\Network\Exception\NotFoundException;
 /**
  * Users Controller
  *
@@ -18,10 +19,20 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
-
+    public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        // Allow users to register and logout.
+        // You should not add the "login" action to allow list. Doing so would
+        // cause problems with normal functioning of AuthComponent.
+        $this->Auth->allow(['logout','login']);
+         /*$this->Auth->allow(['controller'=>'users','action'=>'logout'],['controller'=>'users','action'=>'logout']
+            );*/
+    }
     public function login(){
         if($this->request->is('post')){
             $user = $this->Auth->identify();
+            //debug($user);
             if($user){
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
@@ -29,6 +40,10 @@ class UsersController extends AppController
                 $this->Flash->error('Datos son invalidos, Por favor intente nuevamente',['key'=>'auth']);
             }
         }
+    }
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
     }
     public function index()
     {

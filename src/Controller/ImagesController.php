@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Event\Event;
 /**
  * Images Controller
  *
@@ -18,6 +18,7 @@ class ImagesController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+
     public function index()
     {
         $images = $this->paginate($this->Images);
@@ -26,6 +27,23 @@ class ImagesController extends AppController
         $this->set('_serialize', ['images']);
     }
 
+    public function isAuthorized($user)
+    {
+        // All registered users can add articles
+        if ($this->request->getParam('action') === 'add') {
+            return true;
+        }
+
+        // The owner of an article can edit and delete it
+        if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
+            $imageId = (int)$this->request->getParam('pass.0');
+            if ($this->Images->isOwnedBy($imageId, $user['id'])) {
+                return true;
+            }
+        }
+
+        return parent::isAuthorized($user);
+    }
     /**
      * View method
      *

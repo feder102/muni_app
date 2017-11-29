@@ -10,6 +10,17 @@
       <li class="nav-item active">
         <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Usuario
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <?= $this->Html->link('Listar', ['controller'=>'users','action'=>'index'],['class'=>'dropdown-item']) ?>
+        <?= $this->Html->link('Agregar usuario', ['controller'=>'users','action'=>'add'],['class'=>'dropdown-item']) ?>
+        <?= $this->Html->link('Desconectarse', ['controller'=>'users','action'=>'logout'],['class'=>'dropdown-item']) ?>
+          <!-- <a class="dropdown-item" href="#">Listar</a> -->
+        </div>
+      </li>
       <!-- <li class="nav-item">
         <a class="nav-link" href="#">Features</a>
       </li>
@@ -21,8 +32,9 @@
           Productos
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Agregar</a>
-          <a class="dropdown-item" href="#">Listar</a>
+        <?= $this->Html->link('Listar', ['controller'=>'images','action'=>'index'],['class'=>'dropdown-item']) ?>
+        <?= $this->Html->link('Agregar', ['controller'=>'images','action'=>'add'],['class'=>'dropdown-item']) ?>
+          <!-- <a class="dropdown-item" href="#">Listar</a> -->
         </div>
       </li>
     </ul>

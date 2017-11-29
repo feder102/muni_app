@@ -8,7 +8,6 @@
         <?= $this->Form->create() ?>
             <div class="form-login">
                 <h4>Iingrese sus datos.</h4>
-                <input type="text" id="userName" class="form-control input-sm chat-input" placeholder="username" />
                 <?= $this->Form->input('username',['class'=>'form-control input-lg','placeholder'=>'Nombre de usuario.','label'=>false,'required']) ?>
                 </br>
                 <?= $this->Form->input('password',['class'=>'form-control input-lg','placeholder'=>'Contraseña.','label'=>false,'required']) ?>
