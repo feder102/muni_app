@@ -35,7 +35,8 @@ class UsersController extends AppController
             //debug($user);
             if($user){
                 $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+                /*return $this->redirect($this->Auth->redirectUrl());*/
+                return $this->redirect(['controller'=>'images','action'=>'index']);
             }else{
                 $this->Flash->error('Datos son invalidos, Por favor intente nuevamente',['key'=>'auth']);
             }
