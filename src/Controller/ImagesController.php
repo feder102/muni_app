@@ -55,11 +55,11 @@ class ImagesController extends AppController
             //debug($this->request->data());
             $image = $this->Images->patchEntity($image, $this->request->getData());
             if ($this->Images->save($image)) {
-                $this->Flash->success(__('The image has been saved.'));
+                $this->Flash->success(__('El producto ha sido creado'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The image could not be saved. Please, try again.'));
+            $this->Flash->error(__(' No pudo ser creado, por favor, intente nuevamente.'));
         }
         $this->set(compact('image'));
         $this->set('_serialize', ['image']);

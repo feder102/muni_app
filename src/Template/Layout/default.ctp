@@ -29,7 +29,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->Html->script(['jquery-3.2.1']) ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"></script>
     
-    <?= $this->Html->script(['bootstrap.min']) ?>
+    <?= $this->Html->script(['bootstrap.min','bootstrap-filestyle']) ?>
     <?= $this->Html->css(['bootstrap.min']) ?>
     
     

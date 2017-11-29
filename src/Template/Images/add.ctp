@@ -19,7 +19,7 @@
 </div> -->
 
 <div class="row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="col-md-6 col-sm-6 col-md-offset-3">
         <div class="page-header">
             <h2>Agregar imagen</h2>
         </div>
@@ -30,7 +30,8 @@
                 echo $this->Form->control('description');
                 echo $this->Form->control('quantity');
                 echo $this->Form->control('price');
-                echo $this->Form->control('photo', ['type' => 'file']);
+                echo $this->Form->control('photo', ['type' => 'file','class'=>'filestyle','data-buttonName'=>'btn-primary',
+                    'data-buttonText'=>'Examinar']);
                 
             ?>
         </fieldset>

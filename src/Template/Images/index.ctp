@@ -26,52 +26,36 @@
     </div>
 </div> -->
 
-<div class="row">
-    <div class="col-md-12">
-        <div class="page-header">
-            <h2>
-                Productos
-                <?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Nuevo', ['controller'=>'images','action'=>'add'], ['class'=>'btn btn-sm btn-primary pull-right', 'escape'=>false]) ?>
-            </h2>
-        </div>
+<div class="row mb-5">
+    <div class="page-header">
+        <h2>
+            Productos
+            <?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Nuevo', ['controller'=>'images','action'=>'add'], ['class'=>'btn btn-sm btn-primary pull-right', 'escape'=>false]) ?>
+        </h2>
     </div>
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('name') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('quantity') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('price') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('photo') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('photo_dir') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                    <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
-                    <th scope="col" class="actions"><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($images as $image): ?>
-                <tr>
-                    <td><?= $this->Number->format($image->id) ?></td>
-                    <td><?= h($image->name) ?></td>
-                    <td><?= $this->Number->format($image->quantity) ?></td>
-                    <td><?= $this->Number->format($image->price) ?></td>
-                    <td><?= h($image->photo) ?></td>
-                    <td><?= h($image->photo_dir) ?></td>
-                    <td><?= h($image->created) ?></td>
-                    <td><?= h($image->modified) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $image->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $image->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $image->id], ['confirm' => __('Are you sure you want to delete # {0}?', $image->id)]) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-    </div>
-    
+</div>
+<div class="row mt-5">
+    <?php foreach ($images as $image): ?>
+    <div class="col-md-4 mb-5">
+        <section>
+          <article class="well">
+              <h3> <?= h($image->name) ?></h3>
+              <?= $this->Html->image('../files/images/photo/'. $image->photo_dir . '/square_' . $image->photo, ['alt'=> $image->name,'class'=>'img-responsive img-thumbnail center-block']) ?>
+              <p>
+                  <br>
+                  <strong> Cantidad: </strong><?= h($image->quantity) ?>
+                  <br>
+                  <strong> Precio: </strong><?= h($image->price) ?>
+              </p>
+              <?= $this->Html->link('Ver', ['action'=>'view', $image->id],['class'=>'btn btn-sm btn-info'])?>
+              <?= $this->Form->postLink('Eliminar', ['action' => 'delete', $image->id], ['confirm' => 'Eliminar publicación?','class'=>'btn btn-sm btn-danger']) ?>
+          </article>  
+        </section>
+    </div> 
+    <?php endforeach; ?>  
+</div>     
+            
+<div class="row mb-5">
     <div class="paginator">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('Primero')) ?>
