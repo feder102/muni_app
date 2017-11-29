@@ -31,7 +31,7 @@
                 echo $this->Form->control('quantity');
                 echo $this->Form->control('price');
                 echo $this->Form->control('photo', ['type' => 'file','class'=>'filestyle','data-buttonName'=>'btn-primary',
-                    'data-buttonText'=>'Examinar']);
+                    'data-buttonText'=>'Examinar..']);
                 
             ?>
         </fieldset>

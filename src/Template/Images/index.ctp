@@ -48,6 +48,7 @@
                   <strong> Precio: </strong><?= h($image->price) ?>
               </p>
               <?= $this->Html->link('Ver', ['action'=>'view', $image->id],['class'=>'btn btn-sm btn-info'])?>
+              <?= $this->Html->link('Editar', ['action'=>'edit', $image->id],['class'=>'btn btn-sm btn-warning'])?>
               <?= $this->Form->postLink('Eliminar', ['action' => 'delete', $image->id], ['confirm' => 'Eliminar publicación?','class'=>'btn btn-sm btn-danger']) ?>
           </article>  
         </section>
