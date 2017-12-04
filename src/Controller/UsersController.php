@@ -19,6 +19,7 @@ class UsersController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+   
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);

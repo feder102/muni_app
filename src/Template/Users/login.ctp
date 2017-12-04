@@ -1,9 +1,8 @@
 <!--Pulling Awesome Font -->
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"> -->
 <?= $this->Html->css('login') ?>
-<div class="container">
     <div class="row">
-        <div class="col-md-offset-5 col-md-3">
+        <div class="col-md-offset-3" style="float: none; margin: 0 auto;">
         <?= $this->Flash->render('auth')?>
         <?= $this->Form->create() ?>
             <div class="form-login">
@@ -14,11 +13,10 @@
                 </br>
                 <div class="wrapper">
                     <span class="group-btn">     
-                        <?= $this->Form->button('Acceder',['class'=>'btn btn-primary btn-md'])?>
+                        <?= $this->Form->button('Acceder  <i class="fa fa-sign-in ml-1"></i>',['class'=>'btn btn-primary btn-md'])?>
                     </span>
                 </div>
             </div>
         <?= $this->Form->end()?>
         </div>
     </div>
-</div>

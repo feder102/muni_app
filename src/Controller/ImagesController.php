@@ -18,7 +18,16 @@ class ImagesController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
-
+    /*public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        // Allow users to register and logout.
+        // You should not add the "login" action to allow list. Doing so would
+        // cause problems with normal functioning of AuthComponent.
+        //$this->Auth->allow(['logout','login']);
+         $this->Auth->allow(['controller'=>'users','action'=>'login'],['controller'=>'users','action'=>'logout']
+            );
+    }*/
     public function index()
     {
         $images = $this->paginate($this->Images);

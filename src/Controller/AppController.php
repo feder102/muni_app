@@ -53,11 +53,6 @@ class AppController extends Controller
                         ]
                     ]
                 ],
-                'loginAction' => [
-                    'Controller' => 'users',
-                    'action' => 'login'
-                ],
-                'authError'=>'Ingrese sus datos',
                 'loginRedirect'=> [
                     'Controller'=>'Users',
                     'action'=>'login'
@@ -68,6 +63,10 @@ class AppController extends Controller
                 ]
             ]);
         /*
+        'loginAction' => [
+                    'Controller' => 'users',
+                    'action' => 'login'
+                ],
          * Enable the following components for recommended CakePHP security settings.
          * see https://book.cakephp.org/3.0/en/controllers/components/security.html
          */
@@ -76,7 +75,7 @@ class AppController extends Controller
     }
     public function beforeFilter(Event $event)
     {
-        $this->Auth->allow(['login', 'logout','home']);
+        $this->Auth->allow(['login', 'logout']);
     }
 
     /**

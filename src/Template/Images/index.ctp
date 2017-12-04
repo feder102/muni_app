@@ -25,18 +25,17 @@
         <p><?php //$this->Paginator->counter('{{page}} de {{pages}}')?></p>
     </div>
 </div> -->
-
+<?= $this->Html->link('Nuevo <span class="fa fa-plus ml-1"></span>', ['controller'=>'images','action'=>'add'], ['class'=>'btn btn-sm btn-primary pull-right', 'escape'=>false]) ?>
 <div class="row mb-5">
     <div class="page-header">
         <h2>
-            Productos
-            <?= $this->Html->link('<span class="glyphicon glyphicon-plus"></span> Nuevo', ['controller'=>'images','action'=>'add'], ['class'=>'btn btn-sm btn-primary pull-right', 'escape'=>false]) ?>
+            Productos            
         </h2>
     </div>
 </div>
 <div class="row mt-5">
     <?php foreach ($images as $image): ?>
-    <div class="col-md-4 mb-5">
+    <div class="col-md-3 mb-4">
         <section>
           <article class="well">
               <h3> <?= h($image->name) ?></h3>
