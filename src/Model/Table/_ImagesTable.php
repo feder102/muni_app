@@ -16,6 +16,8 @@ use Cake\Validation\Validator;
  * @method \App\Model\Entity\Image patchEntity(\Cake\Datasource\EntityInterface $entity, array $data, array $options = [])
  * @method \App\Model\Entity\Image[] patchEntities($entities, array $data, array $options = [])
  * @method \App\Model\Entity\Image findOrCreate($search, callable $callback = null, $options = [])
+ *
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class ImagesTable extends Table
 {
@@ -33,6 +35,22 @@ class ImagesTable extends Table
         $this->setTable('images');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
+
+        $this->addBehavior('Timestamp');
+        $this->addBehavior('Proffer.Proffer', [
+            'photo' => [    // The name of your upload field
+                'root' => WWW_ROOT . 'files', // Customise the root upload folder here, or omit to use the default
+                'dir' => 'photo_dir',   // The name of the field to store the folder
+                'thumbnailSizes' => [ // Declare your thumbnails
+                    'square' => [   // Define the prefix of your thumbnail
+                        'w' => 300, // Width
+                        'h' => 300, // Height
+                        'jpeg_quality'  => 100
+                    ]
+                ],
+                'thumbnailMethod' => 'gd'   // Options are Imagick or Gd
+            ]
+        ]);
     }
 
     /**
@@ -48,12 +66,8 @@ class ImagesTable extends Table
             ->allowEmpty('id', 'create');
 
         $validator
-            ->scalar('url')
-            ->requirePresence('url', 'create')
-            ->notEmpty('url');
-
-        $validator
             ->scalar('name')
+            ->maxLength('name', 100)
             ->requirePresence('name', 'create')
             ->notEmpty('name');
 
@@ -61,6 +75,27 @@ class ImagesTable extends Table
             ->scalar('description')
             ->requirePresence('description', 'create')
             ->notEmpty('description');
+
+        $validator
+            ->integer('quantity')
+            ->requirePresence('quantity', 'create')
+            ->notEmpty('quantity');
+
+        $validator
+            ->decimal('price')
+            ->requirePresence('price', 'create')
+            ->notEmpty('price');
+
+        /*$validator->provider('proffer', 'Proffer\Model\Validation\ProfferRules');
+        // Set the thumbnail resize dimensions
+        $validator->add('photo', 'proffer', [
+            'rule' => ['extension' => ['jpeg','png','jpg']],
+            'message' => 'La imagen no tiene la extension correcta.'
+        ]);    */
+        /*https://github.com/davidyell/CakePHP3-Proffer/blob/master/docs/validation.md*/
+        $validator
+            ->requirePresence('photo', 'create')
+            ->notEmpty('photo');
 
         return $validator;
     }

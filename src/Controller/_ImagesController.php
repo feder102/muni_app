@@ -2,7 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Event\Event;
 /**
  * Images Controller
  *
@@ -18,6 +18,16 @@ class ImagesController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    /*public function beforeFilter(Event $event)
+    {
+        parent::beforeFilter($event);
+        // Allow users to register and logout.
+        // You should not add the "login" action to allow list. Doing so would
+        // cause problems with normal functioning of AuthComponent.
+        //$this->Auth->allow(['logout','login']);
+         $this->Auth->allow(['controller'=>'users','action'=>'login'],['controller'=>'users','action'=>'logout']
+            );
+    }*/
     public function index()
     {
         $images = $this->paginate($this->Images);
@@ -26,6 +36,23 @@ class ImagesController extends AppController
         $this->set('_serialize', ['images']);
     }
 
+    public function isAuthorized($user)
+    {
+        // All registered users can add articles
+        if ($this->request->getParam('action') === 'add') {
+            return true;
+        }
+
+        // The owner of an article can edit and delete it
+        if (in_array($this->request->getParam('action'), ['edit', 'delete'])) {
+            $imageId = (int)$this->request->getParam('pass.0');
+            if ($this->Images->isOwnedBy($imageId, $user['id'])) {
+                return true;
+            }
+        }
+
+        return parent::isAuthorized($user);
+    }
     /**
      * View method
      *
@@ -52,13 +79,14 @@ class ImagesController extends AppController
     {
         $image = $this->Images->newEntity();
         if ($this->request->is('post')) {
+            //debug($this->request->data());
             $image = $this->Images->patchEntity($image, $this->request->getData());
             if ($this->Images->save($image)) {
-                $this->Flash->success(__('The image has been saved.'));
+                $this->Flash->success(__('El producto ha sido creado'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The image could not be saved. Please, try again.'));
+            $this->Flash->error(__(' No pudo ser creado, por favor, intente nuevamente.'));
         }
         $this->set(compact('image'));
         $this->set('_serialize', ['image']);
