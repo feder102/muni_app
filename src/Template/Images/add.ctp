@@ -4,38 +4,22 @@
  * @var \App\Model\Entity\Image $image
  */
 ?>
-<!-- <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-        <div class="page-header">
-            <h2>Agregar imagen</h2>
-        </div>
-        <form action="">
-            <fieldset>
-                
-            </fieldset>
-            <?php //$this->Form->button('Agregar imagen'); ?>
-        </form>
-    </div>
-</div> -->
-
-<div class="row">
-    <div class="col-md-6 col-sm-6 col-md-offset-3">
-        <div class="page-header">
-            <h2>Agregar imagen</h2>
-        </div>
-        <?= $this->Form->create($image, ['type' => 'file']);?> 
-            <fieldset>
-            <?php
-                echo $this->Form->control('name');
-                echo $this->Form->control('description');
-                echo $this->Form->control('quantity');
-                echo $this->Form->control('price');
-                echo $this->Form->control('photo', ['type' => 'file','class'=>'filestyle','data-buttonName'=>'btn-primary',
-                    'data-buttonText'=>'Examinar..']);
-                
-            ?>
-        </fieldset>
-        <?= $this->Form->button('Agregar imagen'); ?>
-        <?= $this->Form->end() ?>
-    </div>
+<nav class="large-3 medium-4 columns" id="actions-sidebar">
+    <ul class="side-nav">
+        <li class="heading"><?= __('Actions') ?></li>
+        <li><?= $this->Html->link(__('List Images'), ['action' => 'index']) ?></li>
+    </ul>
+</nav>
+<div class="images form large-9 medium-8 columns content">
+    <?= $this->Form->create($image) ?>
+    <fieldset>
+        <legend><?= __('Add Image') ?></legend>
+        <?php
+            echo $this->Form->control('url');
+            echo $this->Form->control('name');
+            echo $this->Form->control('description');
+        ?>
+    </fieldset>
+    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->end() ?>
 </div>
