@@ -1,3 +1,5 @@
+<?php use Cake\Routing\Router; ?>
+
 <!DOCTYPE html>
 <html>
 <title>W3.CSS Template</title>
@@ -41,7 +43,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </div>
 
 <!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">    
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px" ng-controller="ImagesIndex">    
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
@@ -49,7 +51,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
-         <h4 class="w3-center">My Profile</h4>
+         <h4 class="w3-center">Mi perfil</h4>
          <p class="w3-center"><img src="/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
          <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Designer, UI</p>
@@ -62,37 +64,69 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
     </div>
     
     <!-- Middle Column -->
+
+
+
     <div class="w3-col m7">
-    
+
+
+   <!--<div class="w3-container w3-teal">
+      <h1>RECLAMOS 2017</h1>
+    </div>
+
+     <div class="w3-row-padding w3-margin-top">
+      <div class="w3-second">
+        <div class="w3-card">
+          <img src="{{primero[0].url}}" style="width:100%">
+          <div class="w3-container">
+            <h5>primero[0].name</h5>
+            <p>primero[0].description</p>
+          </div>
+        </div>
+      </div>
+      <div ng-repeat="img in images_muestro">
+          <div class="w3-second">
+            <div class="w3-card">
+              <img src="{{img.url}}" style="width:100%">
+              <div class="w3-container">
+                <h5>{{img.name}}</h5>
+                <p>{{img.description}}</p>
+              </div>
+            </div>
+          </div>
+      </div> -->
+
+
       <div class="w3-row-padding">
         <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
-              <img src="/w3images/avatar6.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
+              <img src="{{primero[0].url}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:45px">
                 <span class="w3-right w3-opacity">32 min</span>
-                <h4>Angie Jane</h4><br>
+                <h4>{{primero[0].name}}</h4><br>
                 <hr class="w3-clear">
-                <p>Have you seen this?</p>
-                <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                <img src="{{primero[0].url}}" style="width:60%" class="w3-margin-bottom">
+                <p>{{primero[0].description}}.</p>
                 <!-- <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
                 <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button> -->
             </div>
           </div>
         </div>
       </div>
-      
-      <div class="w3-container w3-card w3-white w3-round w3-margin"><br>
-        <img src="/w3images/avatar6.png" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:60px">
-        <span class="w3-right w3-opacity">32 min</span>
-        <h4>Angie Jane</h4><br>
-        <hr class="w3-clear">
-        <p>Have you seen this?</p>
-        <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-        <!-- <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
-        <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>  -->
-      </div>  
+      <div ng-repeat="img in images_muestro">
+        <div class="w3-col m12">
+          <div class="w3-container w3-card w3-white w3-round w3-margin" ><br>
+            <img src="{{img.url}}" alt="Avatar" class="w3-left w3-circle w3-margin-right" style="width:45px">
+            <!-- <span class="w3-right w3-opacity">32 min</span> -->
+            <!-- <hr class="w3-clear"> -->
+            <p>{{img.name}}</p>
+            <img src="{{img.url}}" style="width:60%" class="w3-margin-bottom">
+            <p>{{img.description}}.</p>
+            <!-- <button type="button" class="w3-button w3-theme-d1 w3-margin-bottom"><i class="fa fa-thumbs-up"></i>  Like</button> 
+            <button type="button" class="w3-button w3-theme-d2 w3-margin-bottom"><i class="fa fa-comment"></i>  Comment</button>  -->
+          </div>
+        </div>
+      </div>
       
     <!-- End Middle Column -->
     </div>    
@@ -104,38 +138,44 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Open Sans", sans-serif}
 </div>
 <br>
 
-<!-- Footer -->
-<!-- <footer class="w3-container w3-theme-d3 w3-padding-16">
-  <h5>Footer</h5>
-</footer>
-
-<footer class="w3-container w3-theme-d5">
-  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
-</footer> -->
  
-<script>
-// Accordion
-function myFunction(id) {
-    var x = document.getElementById(id);
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-        x.previousElementSibling.className += " w3-theme-d1";
-    } else { 
-        x.className = x.className.replace("w3-show", "");
-        x.previousElementSibling.className = 
-        x.previousElementSibling.className.replace(" w3-theme-d1", "");
-    }
-}
 
-// Used to toggle the menu on smaller screens when clicking on the menu button
-function openNav() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else { 
-        x.className = x.className.replace(" w3-show", "");
+<script type="text/javascript">
+mainApp.controller('ImagesIndex', function($scope,$http){
+    $scope.images = [];
+    $scope.images_muestro = [];
+    $scope.images = <?php echo json_encode($images) ?>;
+    
+    $scope.primero = [];
+    if($scope.images != []){
+        $scope.primero[0] = $scope.images[0];
+        $scope.url = "http://pruebapaez.hol.es";
+        $scope.aux =  $scope.primero[0].url.split("http://127.0.0.1");
+        $scope.url = $scope.url + $scope.aux[1];
+        $scope.primero[0].url = $scope.url;
+        
+
+        for (var i = 1; i < $scope.images.length; i++) {
+            /*debugger;*/
+            $scope.url = "http://pruebapaez.hol.es";
+            $scope.aux =  $scope.images[i].url.split("http://127.0.0.1");
+            $scope.url = $scope.url + $scope.aux[1];
+            $scope.images[i].url = $scope.url;
+            $scope.images_muestro.push($scope.images[i]);
+        };
     }
-}
+    console.log($scope.images_muestro);
+    debugger;
+    $scope.search = function (){
+      // debugger;
+      
+
+      // location.href = url;
+    }
+
+
+
+});
 </script>
 
 </body>

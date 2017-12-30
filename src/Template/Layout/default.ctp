@@ -31,6 +31,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     
     <?= $this->Html->script(['bootstrap.min','bootstrap-filestyle']) ?>
     <?= $this->Html->css(['bootstrap.min','font-awesome']) ?>
+    <?php echo $this->Html->script(array('angular/angular.js','angular/1.5.6-angular-route.min.js','angular/app/app')); ?>
     
     
     <?= $this->fetch('meta') ?>
@@ -38,7 +39,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
 
 </head>
-<body>
+<body ng-app="mainApp">
     <?= $this->element('menu') ?>
     <div class="container" style="margin:100px">
         <?= $this->Flash->render() ?>

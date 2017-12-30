@@ -2,7 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
-
+use Cake\Datasource\ConnectionManager;
+use Cake\ORM\TableRegistry;
 /**
  * Images Controller
  *
@@ -20,7 +21,11 @@ class ImagesController extends AppController
      */
     public function index()
     {
-        $images = $this->paginate($this->Images);
+        /*$images = $this->paginate($this->Images);*/
+        
+        $images = $this->Images->find('all', [
+            'order' => ['Images.id' => 'DESC']
+        ]);
 
         $this->set(compact('images'));
         $this->set('_serialize', ['images']);
