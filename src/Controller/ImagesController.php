@@ -19,13 +19,33 @@ class ImagesController extends AppController
      *
      * @return \Cake\Http\Response|void
      */
+    public $paginate = [
+        'limit' => 5,
+        'order' => [
+            'Images.id' => 'DESC'
+        ]
+    ];
+    
+
+    public function initialize()
+    {
+        parent::initialize();
+        $this->loadComponent('Paginator');
+    }
     public function index()
     {
-        /*$images = $this->paginate($this->Images);*/
+        $images = $this->paginate($this->Images->find('all')
+            ->order(['Images.id' => 'DESC'])
+            );
         
-        $images = $this->Images->find('all', [
+        /*$images = $this->Images->find('all')
+            ->limit('10')
+            ->page(2)
+            ->order(['Images.id' => 'DESC']);*/
+        
+        /*$images = $this->Images->find('all', [
             'order' => ['Images.id' => 'DESC']
-        ]);
+        ]);*/
 
         $this->set(compact('images'));
         $this->set('_serialize', ['images']);
